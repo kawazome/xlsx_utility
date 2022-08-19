@@ -8,7 +8,6 @@ setup(
     author='kawazome',
     packages=find_packages(),
     install_requires=[
-        'debug',
         'openpyxl'
     ],
     dependency_links=[
