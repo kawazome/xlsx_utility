@@ -150,14 +150,14 @@ class xlsx_values(object):
         if not _id: return self._dic
         return self._dic[_id]
 
-    def sub_values(self, condition):
+    def sub_values(self, evaluator):
         sub = xlsx_values()
         sub._id_key = self._id_key
         sub._keys = self._keys
         sub._ids = self._ids
         sub._dic = {}
         for key, val in self._dic.items():
-            if not condition.judge(val): continue
+            if not evaluator.evaluate(val): continue
             sub._dic[key] = val
         return sub
 
@@ -200,12 +200,12 @@ class xlsx_values(object):
             if isinstance(data, (int, float)): result += data
         return result
 
-    def sumifs(self, key, condition):
+    def sumifs(self, key, evaluater):
         result = 0
         for val in self._dic.values():
             data = val[key]
             if not data: continue
-            if not condition.judge(val): continue
+            if not evaluater.evaluate(val): continue
             if isinstance(data, (int, float)): result += data
         return result
 
